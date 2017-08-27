@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_categories_title">CATEGORIA</string>
+    <string name="new_game">NUOVO GIOCO</string>
+    <string name="exit">ESCI</string>
+    <string name="continu">CONTINUA</string>
+    <string name="lost_timer">TEMPO SCADUTO</string>
+    <string name="lost_wrong">HAI SBAGLIATO</string>
+    <string name="retry">RIPROVA</string>
+</resources>

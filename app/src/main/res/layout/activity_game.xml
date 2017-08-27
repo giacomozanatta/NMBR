@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/gameLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorStartActivity"
+    tools:context="com.giacomozanatta.nmbr.GameActivity">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/layoutQuestion"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/question_game_height"
+        android:layout_marginBottom="100dp"
+        android:layout_marginTop="0dp"
+        android:background="#1565c0"
+        android:elevation="5dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toTopOf="@+id/gridKeyboard"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/text_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:text="Inizia la guerra contro Giugurta, re della Numibia"
+            android:textAlignment="center"
+            android:textSize="@dimen/question_textsize"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textCountDown" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/textLife"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:text="life"
+            android:textAlignment="textEnd"
+            android:textSize="@dimen/status_bar_game"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toRightOf="@+id/text_num_question"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/text_num_question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+
+            android:textSize="@dimen/status_bar_game"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="1" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/textPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:text="0"
+            android:textAlignment="textEnd"
+            android:textColor="@color/green"
+            android:textSize="@dimen/status_bar_game"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/textCountDown"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="8dp"
+            android:text="9"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/status_bar_game"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+    </android.support.constraint.ConstraintLayout>
+
+    <com.giacomozanatta.nmbr.view.TextViewApp
+        android:id="@+id/textAnswer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:text="TextView"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/answer_text_size"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/gridKeyboard"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/layoutQuestion" />
+
+    <GridLayout
+        android:id="@+id/gridKeyboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="0dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/layoutQuestion"
+        app:layout_constraintVertical_bias="0.93">
+
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button01"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="1"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button02"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="2"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button03"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="3"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button04"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="4"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button05"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="5"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button06"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="6"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button07"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="7"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button08"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="8"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button09"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="9"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/buttonDel"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="C"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/button00"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize"
+            android:visibility="visible" />
+
+        <com.giacomozanatta.nmbr.view.TextViewApp
+            android:id="@+id/buttonEnter"
+            android:layout_width="@dimen/keybord_button_width"
+            android:layout_height="@dimen/keyboard_button_height"
+            android:background="@null"
+            android:text="GO"
+            android:textColor="@color/white"
+            android:textAlignment="center"
+            android:textSize="@dimen/keyboard_fontsize" />
+
+
+    </GridLayout>
+
+</android.support.constraint.ConstraintLayout>

@@ -1,0 +1,41 @@
+package com.giacomozanatta.nmbr.view;
+
+import android.content.Context;
+import android.graphics.Typeface;
+import android.util.AttributeSet;
+import android.support.v7.widget.AppCompatTextView;
+
+
+/**
+ * Created by giaco on 8/23/2017.
+ */
+
+public class TextViewApp extends AppCompatTextView {
+    private String supportValue;
+    public TextViewApp(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs, defStyle);
+        init();
+    }
+
+    public TextViewApp(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        init();
+    }
+    public void setSupportValue(String supportValue){
+        this.supportValue = supportValue;
+    }
+    public TextViewApp(Context context) {
+        super(context);
+        init();
+    }
+
+    public void init() {
+        Typeface tf = Typeface.createFromAsset(getContext().getAssets(), "fonts/BALOO_REG.ttf");
+        setTypeface(tf ,1);
+
+    }
+
+    public String getSupportValue() {
+        return supportValue;
+    }
+}
