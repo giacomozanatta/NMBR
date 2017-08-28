@@ -22,7 +22,7 @@ public class AnswerCountDown extends CountDownTimer {
         String text = "" + remainingTime;
         try {
             ((TextView)Game.getInstance().getActivity().findViewById(R.id.textCountDown)).setText(text);
-            if(remainingTime==3){
+            if(remainingTime==6){
                 Game.getInstance().startColorAnimation();
 
             }

@@ -21,6 +21,7 @@ public class Game {
     private int curQuestion = 0;
     private int life = 0;
     ValueAnimator colorAnimation;
+    ValueAnimator colorAnimation2;
     public static Game game;
 
     private Game(Activity activity) {
@@ -100,9 +101,13 @@ public class Game {
         if(colorAnimation!=null) {
             Log.i("CIAO", "cancello animation");
             colorAnimation.cancel();
+
         }
+        if(colorAnimation2!=null)
+            colorAnimation2.cancel();
         int color = ContextCompat.getColor(activity, R.color.backgroundQuestion);
         activity.findViewById(R.id.layoutQuestion).setBackgroundColor(color);
+        activity.findViewById(R.id.gameLayout).setBackgroundColor(ContextCompat.getColor(activity, R.color.colorStartActivity));
         ((TextView) activity.findViewById(R.id.text_num_question)).setText(numQuestion);
         initializeCountDown();
         startCountdown();
@@ -149,14 +154,17 @@ public class Game {
     public void startColorAnimation() {
         int colorFrom = ContextCompat.getColor(activity, R.color.backgroundQuestion);
         int colorTo = ContextCompat.getColor(activity, R.color.redAlert);
+        int colorFrom2 = ContextCompat.getColor(activity, R.color.colorStartActivity);
+        int colorTo2 = ContextCompat.getColor(activity, R.color.redAlertBackground);
         colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
-        colorAnimation.setDuration(3000);
+        colorAnimation.setDuration(6000);
         colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
 
             @Override
             public void onAnimationUpdate(ValueAnimator animator) {
                 try {
                     Game.getInstance().getActivity().findViewById(R.id.layoutQuestion).setBackgroundColor((int) animator.getAnimatedValue());
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -164,6 +172,22 @@ public class Game {
 
         });
         colorAnimation.start();
+        colorAnimation2 = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom2, colorTo2);
+        colorAnimation2.setDuration(6000);
+        colorAnimation2.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                try {
+                    Game.getInstance().getActivity().findViewById(R.id.gameLayout).setBackgroundColor((int) animator.getAnimatedValue());
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+        });
+        colorAnimation2.start();
     }
 
     public int getLife() {

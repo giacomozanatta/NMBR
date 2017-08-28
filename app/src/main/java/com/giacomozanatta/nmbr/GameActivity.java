@@ -2,6 +2,7 @@ package com.giacomozanatta.nmbr;
 
 import android.content.Intent;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.app.Activity;
 
@@ -15,9 +16,15 @@ public class GameActivity extends Activity {
     int SHOW_SOLUTION_TAG = 11;
     int CONTINUE = 12;
     int MAIN_MENU = 13;
+    MediaPlayer soundCorrect;
+    MediaPlayer soundWrong;
+    MediaPlayer soundGameOver;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        soundWrong = MediaPlayer.create(this, R.raw.wrong);
+        soundCorrect = MediaPlayer.create(this, R.raw.correct);
+        soundGameOver = MediaPlayer.create(this, R.raw.game_over);
         initKeyboard();
         if (getIntent().getSerializableExtra("Question") != null || !Game.isInit()) {
             Game.initGame(this);
@@ -103,10 +110,13 @@ public class GameActivity extends Activity {
                         Log.i("CIAO", "ora aggiorno i punti");
                         Game.getInstance().updatePoints();
                         Log.i("CIAO", "nuova domanda");
+                        soundCorrect.start();
                         Game.getInstance().newQuestion(); /*nuova domanda*/
                     }
-                    else if(Game.getInstance().checkEndGame())
+                    else if(Game.getInstance().checkEndGame()) {
+                        soundGameOver.start();
                         Game.getInstance().endGame();
+                    }
                     else{
                         /*prima di questo, devo mostrare la soluzione, e permettere all'utente di
                         uscire dal gioco. Mostrare: punteggio e vite rimaste.*/
@@ -121,6 +131,7 @@ public class GameActivity extends Activity {
     }
     public void showSolution(String cause){
         Intent intent = new Intent(this, ShowSolutionActivity.class);
+        soundWrong.start();
         try {
             String curAnswer = Game.getInstance().getCurAnswer();
             String curQuestion = Game.getInstance().getCurQuestion();
