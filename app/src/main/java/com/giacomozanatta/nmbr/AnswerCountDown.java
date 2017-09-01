@@ -24,7 +24,6 @@ public class AnswerCountDown extends CountDownTimer {
             ((TextView)Game.getInstance().getActivity().findViewById(R.id.textCountDown)).setText(text);
             if(remainingTime==6){
                 Game.getInstance().startColorAnimation();
-
             }
         } catch (Exception e) {
             e.printStackTrace();

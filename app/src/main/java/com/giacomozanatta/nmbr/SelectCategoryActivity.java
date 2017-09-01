@@ -33,10 +33,125 @@ public class SelectCategoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_category);
         super.onCreate(savedInstanceState);
+        /*ottengo le categorie memorizzate sulla memoria interna*/
 
-        /*ottengo le categorie*/
+        /*ottengo le categorie e le domande dal server:*/
         RequestCategory rC = new RequestCategory(this);
         rC.execute();
+    }
+
+
+    public void showLocalCategories(ArrayList<String> categories){
+        ConstraintLayout cL =(ConstraintLayout)findViewById(R.id.ConstraintLayoutCategory);
+        if(categories.size()>0){
+            TextViewApp cate = new TextViewApp(this);
+            cate.setText(categories.get(0));
+            cate.setGravity(Gravity.CENTER);
+            cate.setTextColor(getResources().getColor(R.color.white));
+            cate.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.category_text_size));
+            cate.setId(View.generateViewId());
+            cL.addView(cate);
+            ConstraintSet cS = new ConstraintSet();
+            cS.clone(cL);
+            cS.connect(cate.getId(), ConstraintSet.TOP, cL.getId(), ConstraintSet.TOP, 8);
+            cS.connect(cate.getId(), ConstraintSet.LEFT, cL.getId(), ConstraintSet.LEFT, 20);
+            cS.connect(cate.getId(), ConstraintSet.RIGHT, cL.getId(), ConstraintSet.RIGHT, 20);
+            cate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    /*qui l'onclick mi porta a richiedere le questions locali*/
+                }
+            });
+            cS.applyTo(cL);
+
+
+            int lastId=cate.getId();
+            for (int i=1; i<categories.size(); i++) {
+                cate = new TextViewApp(this);
+                cate.setText(categories.get(i));
+                cate.setSupportValue(categories.get(i));
+                cate.setGravity(Gravity.CENTER);
+                cate.setTextColor(getResources().getColor(R.color.white));
+                cate.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.category_text_size));
+                cate.setId(View.generateViewId());
+                cL.addView(cate);
+                cS = new ConstraintSet();
+                cS.clone(cL);
+                cS.connect(cate.getId(), ConstraintSet.TOP, lastId, ConstraintSet.BOTTOM, 8);
+                cS.connect(cate.getId(), ConstraintSet.LEFT, cL.getId(), ConstraintSet.LEFT, 20);
+                cS.connect(cate.getId(), ConstraintSet.RIGHT, cL.getId(), ConstraintSet.RIGHT, 20);
+                cS.applyTo(cL);
+                lastId=cate.getId();
+                cate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        loadOfficialQuestions(((TextViewApp)v).getText().toString());
+                        startGame();
+                    }
+                });
+            }
+        }
+    }
+
+    public void loadOfficialQuestions(String category){
+        questions = FileHandler.getOfficialQuestions(this, category);
+    }
+
+    public void showCategories(){
+        ConstraintLayout cL =(ConstraintLayout)findViewById(R.id.ConstraintLayoutCategory);
+        if(categories.size()>0){
+            TextViewApp cate = new TextViewApp(this);
+            cate.setText(categories.get(0).getName());
+            cate.setSupportValue(categories.get(0).getId());
+            cate.setGravity(Gravity.CENTER);
+            cate.setTextColor(getResources().getColor(R.color.white));
+            cate.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.category_text_size));
+            cate.setId(View.generateViewId());
+            cL.addView(cate);
+            ConstraintSet cS = new ConstraintSet();
+            cS.clone(cL);
+            cS.connect(cate.getId(), ConstraintSet.TOP, cL.getId(), ConstraintSet.TOP, 8);
+            cS.connect(cate.getId(), ConstraintSet.LEFT, cL.getId(), ConstraintSet.LEFT, 20);
+            cS.connect(cate.getId(), ConstraintSet.RIGHT, cL.getId(), ConstraintSet.RIGHT, 20);
+            cate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    requestQuestion(((TextViewApp)v).getSupportValue(), ((TextViewApp) v).getText().toString());
+                }
+            });
+            cS.applyTo(cL);
+
+
+            int lastId=cate.getId();
+            for (int i=1; i<categories.size(); i++) {
+                cate = new TextViewApp(this);
+                cate.setText(categories.get(i).getName());
+                cate.setSupportValue(categories.get(i).getId());
+                cate.setGravity(Gravity.CENTER);
+                cate.setTextColor(getResources().getColor(R.color.white));
+                cate.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.category_text_size));
+                cate.setId(View.generateViewId());
+                cL.addView(cate);
+                cS = new ConstraintSet();
+                cS.clone(cL);
+                cS.connect(cate.getId(), ConstraintSet.TOP, lastId, ConstraintSet.BOTTOM, 8);
+                cS.connect(cate.getId(), ConstraintSet.LEFT, cL.getId(), ConstraintSet.LEFT, 20);
+                cS.connect(cate.getId(), ConstraintSet.RIGHT, cL.getId(), ConstraintSet.RIGHT, 20);
+                cS.applyTo(cL);
+                lastId=cate.getId();
+                cate.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        requestQuestion(((TextViewApp)v).getSupportValue(), ((TextViewApp)v).getText().toString());
+                    }
+                });
+            }
+        }
+    }
+
+    private void requestQuestion(String supportValue, String categoryName) {
+        RequestQuestion rQ = new RequestQuestion(this,  supportValue, categoryName);
+        rQ.execute();
     }
 
     public class RequestCategory extends AsyncTask<String, Void, String> {
@@ -93,70 +208,15 @@ public class SelectCategoryActivity extends Activity {
             super.onPostExecute(result);
         }
     }
-
-    public void showCategories(){
-        ConstraintLayout cL =(ConstraintLayout)findViewById(R.id.ConstraintLayoutCategory);
-        if(categories.size()>0){
-            TextViewApp cate = new TextViewApp(this);
-            cate.setText(categories.get(0).getName());
-            cate.setSupportValue(categories.get(0).getId());
-            cate.setGravity(Gravity.CENTER);
-            cate.setTextColor(getResources().getColor(R.color.white));
-            cate.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.category_text_size));
-            cate.setId(View.generateViewId());
-            cL.addView(cate);
-            ConstraintSet cS = new ConstraintSet();
-            cS.clone(cL);
-            cS.connect(cate.getId(), ConstraintSet.TOP, cL.getId(), ConstraintSet.TOP, 8);
-            cS.connect(cate.getId(), ConstraintSet.LEFT, cL.getId(), ConstraintSet.LEFT, 20);
-            cS.connect(cate.getId(), ConstraintSet.RIGHT, cL.getId(), ConstraintSet.RIGHT, 20);
-            cate.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    requestQuestion(((TextViewApp)v).getSupportValue());
-                }
-            });
-            cS.applyTo(cL);
-
-
-            int lastId=cate.getId();
-            for (int i=1; i<categories.size(); i++) {
-                cate = new TextViewApp(this);
-                cate.setText(categories.get(i).getName());
-                cate.setSupportValue(categories.get(i).getId());
-                cate.setGravity(Gravity.CENTER);
-                cate.setTextColor(getResources().getColor(R.color.white));
-                cate.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.category_text_size));
-                cate.setId(View.generateViewId());
-                cL.addView(cate);
-                cS = new ConstraintSet();
-                cS.clone(cL);
-                cS.connect(cate.getId(), ConstraintSet.TOP, lastId, ConstraintSet.BOTTOM, 8);
-                cS.connect(cate.getId(), ConstraintSet.LEFT, cL.getId(), ConstraintSet.LEFT, 20);
-                cS.connect(cate.getId(), ConstraintSet.RIGHT, cL.getId(), ConstraintSet.RIGHT, 20);
-                cS.applyTo(cL);
-                lastId=cate.getId();
-                cate.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        requestQuestion(((TextViewApp)v).getSupportValue());
-                    }
-                });
-            }
-        }
-    }
-
-    private void requestQuestion(String supportValue) {
-        RequestQuestion rQ = new RequestQuestion(this, supportValue);
-        rQ.execute();
-    }
     public class RequestQuestion extends AsyncTask<String, Void, String> {
         ProgressDialog progressDialog;
         Activity requested;
         String idCat;
-        public RequestQuestion(Activity requested, String idCat) {
+        String categoryName;
+        public RequestQuestion(Activity requested, String idCat, String categoryName) {
             this.requested = requested;
             this.idCat = idCat;
+            this.categoryName = categoryName;
         }
 
         protected void onPreExecute() {
@@ -172,7 +232,7 @@ public class SelectCategoryActivity extends Activity {
             try {
                 URL url = new URL("http://nmbrtest.altervista.org/android/get_question.php?catId="+idCat+"&language="+ Locale.getDefault().getLanguage());
                 BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-
+                Log.i("CIAO", "url -> "+url.toString());
                 String inputLine;
 
                 while ((inputLine = in.readLine()) != null) {
@@ -185,6 +245,7 @@ public class SelectCategoryActivity extends Activity {
                 e.printStackTrace();
                 Log.d("CIAO", "Error: " + e.getMessage());
                 Log.d("CIAO", "HTML CODE: " + htmlCode);
+                Log.i("CIAO", "Errore: non posso ricevere il file!");
             }
             return htmlCode.toString();
         }
@@ -201,6 +262,7 @@ public class SelectCategoryActivity extends Activity {
             for (Question q : questions) {
                 Log.i("CIAO", q.getAnswer() + "-" + q.getQuestion());
             }
+            FileHandler.saveOfficialQuestions(requested, categoryName, questions);
             progressDialog.dismiss();
             startGame();
             super.onPostExecute(result);

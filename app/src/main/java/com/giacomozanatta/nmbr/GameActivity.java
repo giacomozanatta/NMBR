@@ -172,7 +172,6 @@ public class GameActivity extends Activity {
         }
     }
     public void onBackPressed() {
-        // Do Here what ever you want do on back press;
         Intent intent = new Intent(this, MainMenuActivity.class);
         try {
             Game.getInstance().destroy();
