@@ -1,6 +1,7 @@
 package com.giacomozanatta.nmbr;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by giaco on 8/25/2017.
@@ -21,4 +22,5 @@ public class Category implements Serializable{
     public String getName() {
         return name;
     }
+
 }
