@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
     <com.giacomozanatta.nmbr.view.TextViewApp
-        android:id="@+id/expandedListItem"
+        android:id="@+id/listTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -13,6 +15,7 @@
         android:paddingLeft="0dp"
         android:paddingTop="10dp"
         android:textAlignment="center"
-        android:textColor="@android:color/white"
-        android:textSize="40sp" />
+        android:textColor="#bbdefb"
+        android:textSize="30sp"
+        app:textAllCaps="false" />
 </LinearLayout>

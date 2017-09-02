@@ -7,8 +7,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.Activity;
-import android.support.constraint.ConstraintLayout;
-import android.support.constraint.ConstraintSet;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -53,12 +52,10 @@ public class SelectCategoryActivity extends Activity {
 
 
         /*ottengo le categorie memorizzate sulla memoria interna*/
-        ArrayList<String> categoryInternal = FileHandler.getOfficialCategories(this);
+        final ArrayList<String> categoryInternal = FileHandler.getOfficialCategories(this);
         /*ottengo le categorie e le domande dal server:*/
-        RequestCategory rC = new RequestCategory(this);
-        rC.execute();
         /*ottengo le custom cate*/
-        ArrayList<String> categoryCustom = FileHandler.getCustomCategories();
+        final ArrayList<String> categoryCustom = FileHandler.getCustomCategories();
         showCategories(categoryInternal, downloadedCategories, categoryCustom);
 
         listAdapter = new CategoryExpandableListAdapter(this, listDataHeader, listDataChild);
@@ -69,11 +66,21 @@ public class SelectCategoryActivity extends Activity {
 
             @Override
             public void onGroupExpand(int groupPosition) {
-                if(groupPosition==1 && downloadedCategories.size()<1){
+                if(groupPosition==1 && downloadedCategories.size()<1) {
                     /*caso del downloaded*/
                     requestCategory();
-                }
 
+                }
+                if(groupPosition==0 && categoryInternal.size()<1){
+                    expListView.collapseGroup(groupPosition);
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.layoutCategory), "No categories!", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
+                if(groupPosition==2 && categoryCustom.size()<1){
+                    expListView.collapseGroup(groupPosition);
+                    Snackbar snackbar = Snackbar.make(findViewById(R.id.layoutCategory), "No categories!", Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                }
             }
         });
 
@@ -106,6 +113,15 @@ public class SelectCategoryActivity extends Activity {
         expListView.setAdapter(listAdapter);
     }
 
+    private void updateServerGroup(){
+        expListView.collapseGroup(1);
+                    /*!!! va fatto dentro il task o su un metodo chiamato dall'Async Task*/
+        Log.i("CIAO", ""+downloadedCategories.size());
+        if (downloadedCategories.size() > 0) {
+            expListView.expandGroup(1);
+            Log.i("CIAO", "Espando Gruppo");
+        }
+    }
     private String findIdOf(ArrayList<Category> categories, String categoryName) {
         for(Category c : categories){
             if(c.getName().equals(categoryName))
@@ -188,6 +204,9 @@ public class SelectCategoryActivity extends Activity {
                 e.printStackTrace();
                 Log.d("CIAO", "Error: " + e.getMessage());
                 Log.d("CIAO", "HTML CODE: " + htmlCode);
+                Snackbar snackbar = Snackbar.make(requested.findViewById(R.id.layoutCategory), "No internet connection!", Snackbar.LENGTH_LONG);
+                snackbar.show();
+
             }
             return htmlCode.toString();
         }
@@ -196,18 +215,21 @@ public class SelectCategoryActivity extends Activity {
         protected void onPostExecute(String result) {
             //result contiene il JSON delle domande.
             //bisogna estrarre domanda e risposta e salvarle su questions
-            Gson gson = new Gson();
-            Type type = new TypeToken<ArrayList<Category>>() {
-            }.getType();
-            Log.i("CIAO", "JSOOON" + result);
-            downloadedCategories = gson.fromJson(result, type);
-            for (Category cat : downloadedCategories) {
-                Log.i("CIAO", cat.getId() + "-" + cat.getName());
+            if(!result.equals("")) {
+                Gson gson = new Gson();
+                Type type = new TypeToken<ArrayList<Category>>() {
+                }.getType();
+                Log.i("CIAO", "JSOOON" + result);
+                downloadedCategories = gson.fromJson(result, type);
+                for (Category cat : downloadedCategories) {
+                    Log.i("CIAO", cat.getId() + "-" + cat.getName());
+                }
+                List<String> cats = new ArrayList<String>();
+                for (Category downCats : downloadedCategories)
+                    cats.add(downCats.getName());
+                listDataChild.put(listDataHeader.get(1), cats);
             }
-            List<String> cats = new ArrayList<String>();
-            for(Category downCats : downloadedCategories)
-                cats.add(downCats.getName());
-            listDataChild.put(listDataHeader.get(1), cats);
+            updateServerGroup();
             progressDialog.dismiss();
             super.onPostExecute(result);
         }
