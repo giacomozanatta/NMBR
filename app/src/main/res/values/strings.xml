@@ -32,4 +32,8 @@
 
     <string name="action_settings" translatable="false">Settings</string>
     <string name="title_activity_main" translatable="false">MainActivity</string>
+
+    <string name="downloaded">Downloaded</string>
+    <string name="server">Server</string>
+    <string name="custom">Custom</string>
 </resources>

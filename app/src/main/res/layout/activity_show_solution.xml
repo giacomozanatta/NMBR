@@ -22,12 +22,14 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="8dp"
-        tools:layout_constraintRight_creator="1"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        tools:layout_constraintLeft_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        android:layout_marginTop="16dp"
+        tools:layout_constraintLeft_creator="1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <com.giacomozanatta.nmbr.view.TextViewApp
         android:id="@+id/textQuestionShowSolution"
@@ -37,43 +39,33 @@
         android:textColor="@color/white"
         android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
-        android:layout_marginRight="8dp"
+        android:layout_marginRight="7dp"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="7dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        android:layout_marginStart="7dp"
+        android:layout_marginEnd="7dp"
         tools:layout_constraintTop_creator="1"
         tools:layout_constraintRight_creator="1"
-        android:layout_marginTop="87dp"
-        app:layout_constraintTop_toBottomOf="@+id/textHearthShowSolution"
+        android:layout_marginTop="83dp"
         tools:layout_constraintLeft_creator="1"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.giacomozanatta.nmbr.view.TextViewApp
         android:id="@+id/textAnswerShowSolution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:text="1111"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/default_text_size"
+        android:textSize="@dimen/answer_game_over_size"
         android:textStyle="bold"
-        android:layout_marginRight="8dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="8dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        tools:layout_constraintTop_creator="1"
-        tools:layout_constraintRight_creator="1"
+        app:layout_constraintRight_toLeftOf="@+id/textPointsShowSolution"
+        app:layout_constraintLeft_toRightOf="@+id/textHearthShowSolution"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toTopOf="@+id/textBtnContinueShowSolution"
-        android:layout_marginTop="101dp"
-        tools:layout_constraintLeft_creator="1"
-        android:layout_marginBottom="99dp"
-        app:layout_constraintTop_toTopOf="@+id/textQuestionShowSolution"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintVertical_bias="0.0" />
+        android:layout_marginBottom="40dp" />
 
     <com.giacomozanatta.nmbr.view.TextViewApp
         android:id="@+id/textBtnMainMenuShowSolution"
@@ -87,9 +79,8 @@
         android:textStyle="bold"
         app:layout_constraintRight_toLeftOf="@+id/textBtnContinueShowSolution"
         app:layout_constraintLeft_toLeftOf="parent"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="34dp" />
+        android:layout_marginBottom="8dp" />
 
     <com.giacomozanatta.nmbr.view.TextViewApp
         android:id="@+id/textBtnContinueShowSolution"
@@ -103,26 +94,28 @@
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/textBtnMainMenuShowSolution"
-        tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="34dp" />
+        android:layout_marginBottom="8dp" />
 
     <com.giacomozanatta.nmbr.view.TextViewApp
         android:id="@+id/textHearthShowSolution"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginLeft="8dp"
 
-        android:layout_marginStart="8dp"
         android:layout_weight="0.36"
+        android:text="lll"
         android:textAlignment="center"
         android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textPointsShowSolution"
+        app:layout_constraintRight_toLeftOf="@+id/textAnswerShowSolution"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/textPointsShowSolution"
-        tools:layout_constraintBaseline_creator="1" />
+        tools:layout_constraintTop_creator="1"
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toTopOf="@+id/textAnswerShowSolution"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textBtnMainMenuShowSolution"
+        app:layout_constraintVertical_bias="0.17000002" />
 
     <com.giacomozanatta.nmbr.view.TextViewApp
         android:id="@+id/textPointsShowSolution"
@@ -135,11 +128,12 @@
         android:textSize="@dimen/default_text_size"
         android:textStyle="bold"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toRightOf="@+id/textHearthShowSolution"
-        android:layout_marginRight="8dp"
+        app:layout_constraintLeft_toRightOf="@+id/textAnswerShowSolution"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginEnd="8dp"
-        android:layout_marginTop="149dp"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="17dp"
+        app:layout_constraintTop_toTopOf="@+id/textAnswerShowSolution"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/textBtnContinueShowSolution"
+        app:layout_constraintVertical_bias="0.14999998" />
 
 </android.support.constraint.ConstraintLayout>

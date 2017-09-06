@@ -1,7 +1,6 @@
 package com.giacomozanatta.nmbr;
 
 import android.os.CountDownTimer;
-
 import android.widget.TextView;
 
 

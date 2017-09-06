@@ -11,7 +11,6 @@ import android.support.v7.widget.AppCompatTextView;
  */
 
 public class TextViewApp extends AppCompatTextView {
-    private String supportValue;
     public TextViewApp(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init();
@@ -20,9 +19,6 @@ public class TextViewApp extends AppCompatTextView {
     public TextViewApp(Context context, AttributeSet attrs) {
         super(context, attrs);
         init();
-    }
-    public void setSupportValue(String supportValue){
-        this.supportValue = supportValue;
     }
     public TextViewApp(Context context) {
         super(context);
@@ -35,7 +31,4 @@ public class TextViewApp extends AppCompatTextView {
 
     }
 
-    public String getSupportValue() {
-        return supportValue;
-    }
 }

@@ -81,7 +81,7 @@ public class GameActivity extends Activity {
                 public void onClick(View v) {
                     if (answer.getText().length() < 4) {
                         TextView pressed = (TextView) v;
-                        String ans = (String) answer.getText() + pressed.getText();
+                        String ans = "" +answer.getText()+pressed.getText();
                         answer.setText(ans);
                     }
                 }
@@ -92,7 +92,7 @@ public class GameActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (answer.getText().length() > 0 ) {
-                    String ans = (String) answer.getText();
+                    String ans = "" + answer.getText();
                     ans = ans.substring(0, ans.length()-1);
                     answer.setText(ans);
                 }
@@ -103,7 +103,7 @@ public class GameActivity extends Activity {
         keyboard[11].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String ans = (String) answer.getText();
+                String ans = ""+ answer.getText();
                 try {
 
                     if (Game.getInstance().checkAnswer(ans)) {

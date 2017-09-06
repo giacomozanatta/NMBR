@@ -7,4 +7,7 @@
     <string name="lost_timer">TEMPO SCADUTO</string>
     <string name="lost_wrong">HAI SBAGLIATO</string>
     <string name="retry">RIPROVA</string>
+    <string name="server">Server</string>
+    <string name="downloaded">Scaricate</string>
+    <string name="custom">Custom</string>
 </resources>

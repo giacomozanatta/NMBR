@@ -3,10 +3,7 @@ package com.giacomozanatta.nmbr;
 
 import android.os.Bundle;
 import android.view.View;
-
-
 import android.app.Activity;
-
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;

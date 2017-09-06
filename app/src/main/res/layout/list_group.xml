@@ -16,6 +16,6 @@
         android:paddingTop="10dp"
         android:textAlignment="center"
         android:textColor="#bbdefb"
-        android:textSize="30sp"
+        android:textSize="@dimen/category_title"
         app:textAllCaps="false" />
 </LinearLayout>

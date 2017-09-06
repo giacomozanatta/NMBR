@@ -14,5 +14,5 @@
         android:paddingTop="10dp"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="40sp" />
+        android:textSize="@dimen/category_name" />
 </LinearLayout>

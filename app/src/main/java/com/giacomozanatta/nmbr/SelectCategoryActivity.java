@@ -9,14 +9,10 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
-import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.View;
-import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
-import com.giacomozanatta.nmbr.view.TextViewApp;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,23 +40,16 @@ public class SelectCategoryActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_category);
         super.onCreate(savedInstanceState);
-
-
-
         /*EXPANDABLE LIST VIEW*/
         expListView = (ExpandableListView) findViewById(R.id.expandableListCate);
-
-
         /*ottengo le categorie memorizzate sulla memoria interna*/
         final ArrayList<String> categoryInternal = FileHandler.getOfficialCategories(this);
         /*ottengo le categorie e le domande dal server:*/
         /*ottengo le custom cate*/
         final ArrayList<String> categoryCustom = FileHandler.getCustomCategories();
         showCategories(categoryInternal, downloadedCategories, categoryCustom);
-
         listAdapter = new CategoryExpandableListAdapter(this, listDataHeader, listDataChild);
         // Listview on child click listener
-
         // Listview Group expanded listener
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
 
@@ -69,7 +58,6 @@ public class SelectCategoryActivity extends Activity {
                 if(groupPosition==1 && downloadedCategories.size()<1) {
                     /*caso del downloaded*/
                     requestCategory();
-
                 }
                 if(groupPosition==0 && categoryInternal.size()<1){
                     expListView.collapseGroup(groupPosition);
@@ -157,9 +145,9 @@ public class SelectCategoryActivity extends Activity {
         listDataChild = new HashMap<String, List<String>>();
 
         // Adding child data
-        listDataHeader.add("Scaricate");
-        listDataHeader.add("Server");
-        listDataHeader.add("Personali");
+        listDataHeader.add(getString(R.string.downloaded));
+        listDataHeader.add(getString(R.string.server));
+        listDataHeader.add(getString(R.string.custom));
         List<String> serverCats = new ArrayList<String>();
         for(Category c : server)
             serverCats.add(c.getName());

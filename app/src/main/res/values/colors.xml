@@ -8,6 +8,6 @@
     <color name="hearth">#f44336</color>
     <color name="green">#4caf50</color>
     <color name="redAlert">#b71c1c</color>
-    <color name="backgroundQuestion">#006064</color> <!--#00838f-->
+    <color name="backgroundQuestion">#1e4770</color> <!--#00838f-->
     <color name="redAlertBackground">#880e4f</color>
 </resources>
